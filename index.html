@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>통계학 완벽 학습 가이드</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@11.11.0/lib/browser/math.min.js"></script>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <div class="container">
+            <h1>📊 통계학 완벽 학습 가이드</h1>
+            <p>데이터로 가치를 창출하기 위한 통계학 로드맵</p>
+        </div>
+    </header>
+
+    <!-- 네비게이션 -->
+    <nav id="mainNav">
+        <div class="container">
+            <ul>
+                <li><a href="#home" class="nav-link active">홈</a></li>
+                <li><a href="#basic" class="nav-link">기초</a></li>
+                <li><a href="#intermediate" class="nav-link">중급</a></li>
+                <li><a href="#advanced" class="nav-link">고급</a></li>
+                <li><a href="#interactive" class="nav-link">실습</a></li>
+                <li><a href="#progress" class="nav-link">진행도</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 진행도 바 -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="container">
+
+        <!-- 홈 섹션 -->
+        <section id="home" class="section active">
+            <h2>환영합니다!</h2>
+            <div class="card">
+                <h3>학습 로드맵</h3>
+                <div class="roadmap">
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon">📘</div>
+                        <h4>1단계: 기초 통계학</h4>
+                        <ul>
+                            <li>기술통계학</li>
+                            <li>확률의 기초</li>
+                            <li>확률분포</li>
+                            <li>표본추출</li>
+                        </ul>
+                        <button class="btn" onclick="navigateToSection('basic')">시작하기</button>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon">📗</div>
+                        <h4>2단계: 중급 통계학</h4>
+                        <ul>
+                            <li>통계적 추정</li>
+                            <li>가설검정</li>
+                            <li>회귀분석</li>
+                            <li>분산분석</li>
+                        </ul>
+                        <button class="btn" onclick="navigateToSection('intermediate')">시작하기</button>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon">📕</div>
+                        <h4>3단계: 고급 통계학</h4>
+                        <ul>
+                            <li>다변량 분석</li>
+                            <li>시계열 분석</li>
+                            <li>베이지안 통계</li>
+                            <li>기계학습 통계</li>
+                        </ul>
+                        <button class="btn" onclick="navigateToSection('advanced')">시작하기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>왜 통계학을 배워야 하나요?</h3>
+                <div class="benefits">
+                    <div class="benefit-item">
+                        <span class="benefit-icon">💼</span>
+                        <h4>실무 활용</h4>
+                        <p>데이터 기반 의사결정, A/B 테스트, 고객 분석</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🎯</span>
+                        <h4>정확한 예측</h4>
+                        <p>매출 예측, 수요 예측, 리스크 관리</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🚀</span>
+                        <h4>AI/ML 기초</h4>
+                        <p>기계학습의 필수 기반 지식</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 기초 통계학 섹션 -->
+        <section id="basic" class="section">
+            <h2>📘 기초 통계학</h2>
+
+            <div class="card">
+                <h3>1. 기술통계학</h3>
+                <p>데이터를 요약하고 설명하는 통계적 기법</p>
+
+                <div class="subsection">
+                    <h4>중심경향성 (Central Tendency)</h4>
+                    <div class="formula-box">
+                        <p><strong>평균 (Mean):</strong> μ = Σx / n</p>
+                        <p><strong>중앙값 (Median):</strong> 중간 값</p>
+                        <p><strong>최빈값 (Mode):</strong> 가장 빈도 높은 값</p>
+                    </div>
+
+                    <div class="calculator">
+                        <h5>🧮 평균·중앙값 계산기</h5>
+                        <label>데이터 입력 (쉼표로 구분):</label>
+                        <input type="text" id="dataInput" placeholder="예: 10, 20, 30, 40, 50" value="10, 20, 30, 40, 50">
+                        <button class="btn" onclick="calculateStats()">계산하기</button>
+                        <div id="statsResult" class="result"></div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h4>산포도 (Dispersion)</h4>
+                    <div class="formula-box">
+                        <p><strong>분산 (Variance):</strong> σ² = Σ(x - μ)² / n</p>
+                        <p><strong>표준편차 (SD):</strong> σ = √σ²</p>
+                        <p><strong>변동계수 (CV):</strong> (σ / μ) × 100%</p>
+                    </div>
+
+                    <div class="visualization">
+                        <h5>📊 정규분포 시각화</h5>
+                        <canvas id="normalDistChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>2. 확률의 기초</h3>
+                <div class="formula-box">
+                    <p><strong>덧셈 법칙:</strong> P(A ∪ B) = P(A) + P(B) - P(A ∩ B)</p>
+                    <p><strong>곱셈 법칙:</strong> P(A ∩ B) = P(A) × P(B|A)</p>
+                    <p><strong>베이즈 정리:</strong> P(A|B) = P(B|A) × P(A) / P(B)</p>
+                </div>
+
+                <div class="calculator">
+                    <h4>🎲 베이즈 정리 계산기</h4>
+                    <label>P(A) - 사전확률:</label>
+                    <input type="number" id="priorA" step="0.01" min="0" max="1" value="0.01">
+
+                    <label>P(B|A) - 우도:</label>
+                    <input type="number" id="likelihoodBA" step="0.01" min="0" max="1" value="0.99">
+
+                    <label>P(B|A') - 위양성률:</label>
+                    <input type="number" id="likelihoodBNotA" step="0.01" min="0" max="1" value="0.05">
+
+                    <button class="btn" onclick="calculateBayes()">계산하기</button>
+                    <div id="bayesResult" class="result"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>3. 주요 확률분포</h3>
+                <div class="distribution-selector">
+                    <label>분포 선택:</label>
+                    <select id="distSelect" onchange="updateDistribution()">
+                        <option value="normal">정규분포</option>
+                        <option value="binomial">이항분포</option>
+                        <option value="poisson">포아송분포</option>
+                        <option value="exponential">지수분포</option>
+                    </select>
+                    <canvas id="distributionChart"></canvas>
+                </div>
+            </div>
+
+            <div class="quiz-section">
+                <h3>💡 퀴즈: 기초 통계</h3>
+                <div class="quiz-question">
+                    <p><strong>Q1:</strong> 데이터가 [10, 20, 30, 40, 100]일 때, 이상치에 가장 영향을 적게 받는 중심경향성 지표는?</p>
+                    <div class="quiz-options">
+                        <button onclick="checkAnswer('q1', 'mean', false)">평균</button>
+                        <button onclick="checkAnswer('q1', 'median', true)">중앙값</button>
+                        <button onclick="checkAnswer('q1', 'mode', false)">최빈값</button>
+                    </div>
+                    <div id="q1-feedback" class="quiz-feedback"></div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="btn btn-secondary" onclick="navigateToSection('home')">← 홈으로</button>
+                <button class="btn btn-primary" onclick="navigateToSection('intermediate')">중급으로 →</button>
+            </div>
+        </section>
+
+        <!-- 중급 통계학 섹션 -->
+        <section id="intermediate" class="section">
+            <h2>📗 중급 통계학</h2>
+
+            <div class="card">
+                <h3>1. 신뢰구간 (Confidence Interval)</h3>
+                <div class="formula-box">
+                    <p><strong>모평균 (σ 알 때):</strong> x̄ ± Z<sub>α/2</sub> × (σ / √n)</p>
+                    <p><strong>모평균 (σ 모를 때):</strong> x̄ ± t<sub>α/2</sub> × (s / √n)</p>
+                    <p><strong>모비율:</strong> p̂ ± Z<sub>α/2</sub> × √(p̂(1-p̂) / n)</p>
+                </div>
+
+                <div class="calculator">
+                    <h4>📏 신뢰구간 계산기</h4>
+                    <label>표본평균 (x̄):</label>
+                    <input type="number" id="sampleMean" value="50">
+
+                    <label>표본표준편차 (s):</label>
+                    <input type="number" id="sampleStd" value="10">
+
+                    <label>표본크기 (n):</label>
+                    <input type="number" id="sampleSize" value="25">
+
+                    <label>신뢰수준:</label>
+                    <select id="confidenceLevel">
+                        <option value="90">90%</option>
+                        <option value="95" selected>95%</option>
+                        <option value="99">99%</option>
+                    </select>
+
+                    <button class="btn" onclick="calculateCI()">계산하기</button>
+                    <div id="ciResult" class="result"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>2. 가설검정 (Hypothesis Testing)</h3>
+                <div class="hypothesis-flow">
+                    <div class="flow-item">
+                        <h4>1단계: 가설 설정</h4>
+                        <p>H₀ (귀무가설) vs H₁ (대립가설)</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">
+                        <h4>2단계: 유의수준</h4>
+                        <p>α = 0.05 (일반적)</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">
+                        <h4>3단계: 검정통계량</h4>
+                        <p>t = (x̄ - μ₀) / (s / √n)</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">
+                        <h4>4단계: 결론</h4>
+                        <p>p-value < α → H₀ 기각</p>
+                    </div>
+                </div>
+
+                <div class="calculator">
+                    <h4>🔬 t-검정 계산기</h4>
+                    <label>표본평균:</label>
+                    <input type="number" id="testMean" value="52">
+
+                    <label>귀무가설 평균 (μ₀):</label>
+                    <input type="number" id="nullMean" value="50">
+
+                    <label>표본표준편차:</label>
+                    <input type="number" id="testStd" value="10">
+
+                    <label>표본크기:</label>
+                    <input type="number" id="testSize" value="25">
+
+                    <label>검정 방향:</label>
+                    <select id="testType">
+                        <option value="two">양측검정 (≠)</option>
+                        <option value="right">우측검정 (>)</option>
+                        <option value="left">좌측검정 (<)</option>
+                    </select>
+
+                    <button class="btn" onclick="performTTest()">검정하기</button>
+                    <div id="tTestResult" class="result"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>3. 회귀분석 (Regression Analysis)</h3>
+                <p>Y = β₀ + β₁X + ε</p>
+
+                <div class="calculator">
+                    <h4>📈 단순선형회귀 계산기</h4>
+                    <label>X 값 (쉼표로 구분):</label>
+                    <input type="text" id="xValues" placeholder="1, 2, 3, 4, 5" value="1, 2, 3, 4, 5">
+
+                    <label>Y 값 (쉼표로 구분):</label>
+                    <input type="text" id="yValues" placeholder="2, 4, 5, 4, 5" value="2, 4, 5, 4, 5">
+
+                    <button class="btn" onclick="performRegression()">회귀분석</button>
+                    <div id="regressionResult" class="result"></div>
+                    <canvas id="regressionChart"></canvas>
+                </div>
+            </div>
+
+            <div class="quiz-section">
+                <h3>💡 퀴즈: 중급 통계</h3>
+                <div class="quiz-question">
+                    <p><strong>Q2:</strong> p-value가 0.03이고 유의수준이 0.05일 때, 올바른 결론은?</p>
+                    <div class="quiz-options">
+                        <button onclick="checkAnswer('q2', 'accept', false)">귀무가설 채택</button>
+                        <button onclick="checkAnswer('q2', 'reject', true)">귀무가설 기각</button>
+                        <button onclick="checkAnswer('q2', 'uncertain', false)">판단 불가</button>
+                    </div>
+                    <div id="q2-feedback" class="quiz-feedback"></div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="btn btn-secondary" onclick="navigateToSection('basic')">← 기초로</button>
+                <button class="btn btn-primary" onclick="navigateToSection('advanced')">고급으로 →</button>
+            </div>
+        </section>
+
+        <!-- 고급 통계학 섹션 -->
+        <section id="advanced" class="section">
+            <h2>📕 고급 통계학</h2>
+
+            <div class="card">
+                <h3>1. 주성분 분석 (PCA)</h3>
+                <p>고차원 데이터를 저차원으로 축소하여 주요 패턴을 파악</p>
+                <div class="visualization">
+                    <h4>PCA 개념 시각화</h4>
+                    <canvas id="pcaChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>2. 시계열 분석</h3>
+                <div class="formula-box">
+                    <p><strong>ARIMA(p,d,q):</strong></p>
+                    <p>p: AR 차수, d: 차분 차수, q: MA 차수</p>
+                </div>
+
+                <div class="visualization">
+                    <h4>📊 시계열 분해</h4>
+                    <canvas id="timeseriesChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>3. 베이지안 통계</h3>
+                <div class="formula-box">
+                    <p><strong>Posterior ∝ Likelihood × Prior</strong></p>
+                    <p>사후분포 = 우도 × 사전분포 / 증거</p>
+                </div>
+
+                <div class="calculator">
+                    <h4>🎯 베이지안 업데이트 시뮬레이터</h4>
+                    <label>사전 α (성공):</label>
+                    <input type="number" id="priorAlpha" value="1" min="1">
+
+                    <label>사전 β (실패):</label>
+                    <input type="number" id="priorBeta" value="1" min="1">
+
+                    <label>관측된 성공:</label>
+                    <input type="number" id="obsSuccess" value="7" min="0">
+
+                    <label>관측된 실패:</label>
+                    <input type="number" id="obsFail" value="3" min="0">
+
+                    <button class="btn" onclick="updateBayesian()">업데이트</button>
+                    <div id="bayesianResult" class="result"></div>
+                    <canvas id="bayesianChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>4. A/B 테스트</h3>
+                <div class="calculator">
+                    <h4>🧪 A/B 테스트 계산기</h4>
+
+                    <div class="ab-group">
+                        <h5>그룹 A (대조군)</h5>
+                        <label>방문자 수:</label>
+                        <input type="number" id="visitorsA" value="1000">
+                        <label>전환 수:</label>
+                        <input type="number" id="conversionsA" value="100">
+                    </div>
+
+                    <div class="ab-group">
+                        <h5>그룹 B (실험군)</h5>
+                        <label>방문자 수:</label>
+                        <input type="number" id="visitorsB" value="1000">
+                        <label>전환 수:</label>
+                        <input type="number" id="conversionsB" value="130">
+                    </div>
+
+                    <button class="btn" onclick="performABTest()">분석하기</button>
+                    <div id="abTestResult" class="result"></div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="btn btn-secondary" onclick="navigateToSection('intermediate')">← 중급으로</button>
+                <button class="btn btn-primary" onclick="navigateToSection('interactive')">실습으로 →</button>
+            </div>
+        </section>
+
+        <!-- 인터랙티브 실습 섹션 -->
+        <section id="interactive" class="section">
+            <h2>🎯 인터랙티브 실습</h2>
+
+            <div class="card">
+                <h3>중심극한정리 시뮬레이션</h3>
+                <p>표본 크기가 커질수록 표본평균의 분포가 정규분포에 가까워지는 것을 확인</p>
+
+                <div class="calculator">
+                    <label>모집단 분포:</label>
+                    <select id="popDist">
+                        <option value="uniform">균등분포</option>
+                        <option value="exponential">지수분포</option>
+                        <option value="bimodal">이봉분포</option>
+                    </select>
+
+                    <label>표본 크기 (n):</label>
+                    <input type="range" id="cltSampleSize" min="1" max="100" value="30" oninput="updateCLTLabel()">
+                    <span id="cltSizeLabel">30</span>
+
+                    <label>시뮬레이션 횟수:</label>
+                    <input type="number" id="cltIterations" value="1000" min="100" max="10000">
+
+                    <button class="btn" onclick="runCLTSimulation()">시뮬레이션 실행</button>
+                    <canvas id="cltChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>상관관계 vs 인과관계</h3>
+                <p>상관관계가 있어도 인과관계는 아닐 수 있습니다</p>
+
+                <div class="interactive-example">
+                    <h4>예제: 아이스크림 판매량과 익사 사고</h4>
+                    <canvas id="correlationChart"></canvas>
+                    <p class="warning">⚠️ 높은 상관관계(r=0.95)가 있지만, 아이스크림이 익사를 일으키진 않습니다!</p>
+                    <p>숨겨진 변수: <strong>여름 기온</strong></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>샘플 크기 계산기</h3>
+                <div class="calculator">
+                    <label>예상 효과 크기 (Cohen's d):</label>
+                    <input type="number" id="effectSize" value="0.5" step="0.1" min="0.1">
+
+                    <label>검정력 (Power):</label>
+                    <select id="power">
+                        <option value="0.7">0.7 (70%)</option>
+                        <option value="0.8" selected>0.8 (80%)</option>
+                        <option value="0.9">0.9 (90%)</option>
+                    </select>
+
+                    <label>유의수준 (α):</label>
+                    <select id="alpha">
+                        <option value="0.01">0.01</option>
+                        <option value="0.05" selected>0.05</option>
+                        <option value="0.1">0.10</option>
+                    </select>
+
+                    <button class="btn" onclick="calculateSampleSize()">계산하기</button>
+                    <div id="sampleSizeResult" class="result"></div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="btn btn-secondary" onclick="navigateToSection('advanced')">← 고급으로</button>
+                <button class="btn btn-primary" onclick="navigateToSection('progress')">진행도 →</button>
+            </div>
+        </section>
+
+        <!-- 학습 진행도 섹션 -->
+        <section id="progress" class="section">
+            <h2>📊 학습 진행도</h2>
+
+            <div class="card">
+                <h3>전체 진행률</h3>
+                <div class="progress-stats">
+                    <div class="stat-item">
+                        <h4 id="totalProgress">0%</h4>
+                        <p>전체 진행도</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4 id="completedTopics">0</h4>
+                        <p>완료한 주제</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4 id="studyTime">0</h4>
+                        <p>학습 시간 (분)</p>
+                    </div>
+                </div>
+                <canvas id="progressChart"></canvas>
+            </div>
+
+            <div class="card">
+                <h3>학습 체크리스트</h3>
+                <div class="checklist">
+                    <h4>📘 기초 통계학</h4>
+                    <label><input type="checkbox" onchange="updateProgress()"> 기술통계학 이해</label>
+                    <label><input type="checkbox" onchange="updateProgress()"> 확률의 기본 개념</label>
+                    <label><input type="checkbox" onchange="updateProgress()"> 주요 확률분포 학습</label>
+                    <label><input type="checkbox" onchange="updateProgress()"> 표본추출 방법 이해</label>
+
+                    <h4>📗 중급 통계학</h4>
+                    <label><input type="checkbox" onchange="updateProgress()"> 신뢰구간 계산 및 해석</label>
+                    <label><input type="checkbox" onchange="updateProgress()"> 가설검정 수행</label>
+                    <label><input type="checkbox" onchange="updateProgress()"> 회귀분석 이해</label>
+                    <label><input type="checkbox" onchange="updateProgress()"> ANOVA 수행</label>
+
+                    <h4>📕 고급 통계학</h4>
+                    <label><input type="checkbox" onchange="updateProgress()"> 다변량 분석 이해</label>
+                    <label><input type="checkbox" onchange="updateProgress()"> 시계열 모델링</label>
+                    <label><input type="checkbox" onchange="updateProgress()"> 베이지안 추론</label>
+                    <label><input type="checkbox" onchange="updateProgress()"> 실무 프로젝트 완료</label>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>다음 학습 추천</h3>
+                <div class="recommendations">
+                    <div class="rec-item">
+                        <h4>Python으로 통계 실습</h4>
+                        <p>NumPy, Pandas, SciPy, Statsmodels 활용</p>
+                        <button class="btn btn-sm">학습하기</button>
+                    </div>
+                    <div class="rec-item">
+                        <h4>R로 통계 분석</h4>
+                        <p>dplyr, ggplot2, tidyverse 활용</p>
+                        <button class="btn btn-sm">학습하기</button>
+                    </div>
+                    <div class="rec-item">
+                        <h4>기계학습 입문</h4>
+                        <p>Scikit-learn으로 ML 시작하기</p>
+                        <button class="btn btn-sm">학습하기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="btn btn-secondary" onclick="navigateToSection('interactive')">← 실습으로</button>
+                <button class="btn btn-primary" onclick="navigateToSection('home')">홈으로 →</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 통계학 완벽 학습 가이드. 데이터로 가치를 창출하세요.</p>
+            <p>
+                <a href="docs/01-basic-statistics.md">기초 문서</a> |
+                <a href="docs/02-intermediate-statistics.md">중급 문서</a> |
+                <a href="docs/03-advanced-statistics.md">고급 문서</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
